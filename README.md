@@ -22,7 +22,6 @@ This repository sets up:
 * A publicly-accessible EC2 instance
 * Within the instance:
    * OpenVPN
-   * Jenkins
    * Docker {Portainer (SonnarQube and Selenium)}
 
 ## Setup
@@ -33,7 +32,7 @@ This repository sets up:
     * Python (see [requirements](https://docs.ansible.com/ansible/latest/intro_installation.html#control-machine-requirements))
     * [pip](https://pip.pypa.io/en/stable/installing/)
 1. Set up AWS credentials in [`~/.aws/credentials`](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-config-files).
-    * The easiest way to do so is by [setting up the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html).
+    * The easiest way to do this [setting up the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html).
 1. Ensure you have an SSH public key at `~/.ssh/id_rsa.pub`.
     * [How to generate](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
 
