@@ -1,27 +1,30 @@
 # Create a VPC to launch our instances into
-resource "aws_vpc" "cmt" {
+resource "aws_vpc" "vpc" {
   cidr_block = "10.2.0.0/16"
+
   tags {
-    Name= "cmt"
+    Name = "vpc"
   }
 }
 
 # Create public subnet
 resource "aws_subnet" "public-sub" {
-  vpc_id      ="${aws_vpc.cmt.id}"
+  vpc_id                  = "${aws_vpc.vpc.id}"
   cidr_block              = "10.2.0.0/24"
   map_public_ip_on_launch = true
+
   tags {
-    Name= "CMT Public SUBNET"
+    Name = "Public SUBNET"
   }
 }
 
 # Our public Security Group for
 # connect the VPN
-resource "aws_security_group" "vivo_public_sg" {
-  vpc_id      ="${aws_vpc.cmt.id}"
+resource "aws_security_group" "public_sg" {
+  vpc_id = "${aws_vpc.vpc.id}"
+
   tags {
-    Name="vivo_public_sg"
+    Name = "public_sg"
   }
 
   ingress {
