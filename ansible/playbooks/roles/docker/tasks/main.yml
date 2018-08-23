@@ -1,0 +1,56 @@
+---
+- name: check for docker binaries installation...
+  become: yes
+  stat:
+    path: '{{docker_binaries_ver_install_dir}}'
+  changed_when: false
+  register: docker_binaries_bin_dir
+- when: not docker_binaries_bin_dir.stat.exists
+  block:
+    - name: copy docker binaries...
+      become: true
+      copy:
+        src: docker-18.03.0-ce.tgz
+        dest: /tmp/{{docker_binaries_tgz}}
+        mode: 0644
+
+    - name: mkdir versioned target dir
+      become: yes
+      become_user: root
+      file:
+        path: '{{docker_binaries_ver_install_dir}}'
+        state: directory
+        mode: 0755
+
+    - name: unarchive docker binaries...
+      become: yes
+      become_user: root
+      unarchive:
+        remote_src: yes
+        src: /tmp/{{docker_binaries_tgz}}
+        dest: '{{docker_binaries_ver_install_dir}}'
+        creates: '{{docker_binaries_ver_install_dir}}/docker'
+  always:
+    - name: cleanup...
+      become: yes
+      become_user: root
+      file:
+        path: /tmp/{{docker_binaries_tgz}}
+        state: absent
+
+- name: link docker binaries
+  become: yes
+  become_user: root
+  with_items:
+    - docker
+    - docker-containerd
+    - docker-containerd-ctr
+    - docker-containerd-shim
+    - dockerd
+    - docker-init
+    - docker-proxy
+    - docker-runc
+  file:
+    src: '{{docker_binaries_ver_install_dir}}/docker/{{item}}'
+    dest: '{{docker_binaries_install_dir}}/{{item}}'
+    state: link

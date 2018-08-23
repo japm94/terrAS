@@ -1,0 +1,4 @@
+- hosts: vpn
+  gather_facts: true
+  roles:
+    - {role: openvpn, clients: [client]}

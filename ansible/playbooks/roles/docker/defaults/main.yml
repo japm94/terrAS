@@ -1,0 +1,7 @@
+---
+
+docker_binaries_ver: '18.03.0'
+docker_binaries_edition: ce
+
+docker_binaries_install_dir: /usr/local/bin
+

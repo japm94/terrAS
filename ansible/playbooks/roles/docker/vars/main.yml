@@ -1,0 +1,4 @@
+---
+docker_binaries_name: 'docker-{{docker_binaries_ver}}-{{docker_binaries_edition}}'
+docker_binaries_tgz: '{{docker_binaries_name}}.tgz'
+docker_binaries_ver_install_dir: '{{docker_binaries_install_dir}}/{{docker_binaries_name}}'
