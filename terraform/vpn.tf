@@ -4,7 +4,7 @@ resource "aws_key_pair" "auth" {
 
 resource "aws_instance" "vpn" {
   instance_type               = "t2.micro"
-  ami                         = "ami-97785bed"
+  ami                         = "ami-04169656fea786776"
   associate_public_ip_address = true
 
   # Tags to indentify the instace
@@ -17,9 +17,9 @@ resource "aws_instance" "vpn" {
   key_name = "${var.key_name}"
 
   # Our Security group to allow HTTP and SSH access
-  vpc_security_group_ids = ["${aws_security_group.vivo_public_sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.public_sg.id}"]
 
-  subnet_id = "${aws_subnet.cmt-public-sub.id}"
+  subnet_id = "${aws_subnet.public-sub.id}"
 
   # force Terraform to wait until a connection can be made, so that Ansible doesn't fail when trying to provision
   # provisioner "remote-exec" {
